@@ -1,42 +1,40 @@
-import Fox from './test_1';
-import _ from 'lodash';
+import 'reset-css';
 import '../scss/index.scss';
 
-console.log('Fox',Fox);
-console.log(`The quick ${Fox.color} ${Fox.name} jumps over the lazy dog.`)
-function component() {
-    const element = document.createElement('div');
-
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-    return element;
-}
-
-document.body.appendChild(component());
-
-import triss from '../images/copic_2.jpg'; 
-var img = new Image(); 
-img.src = triss; 
-document.body.appendChild(img);
-
-const logAsync = (message, time) => {
-    return new Promise((resolve, reject) => {
-        if (message && time) {
-            setTimeout(() => {
-                console.log(message);
-                resolve()
-            }, time);
-        } else {
-            reject();
-        }
-    });
-};
-
-const demo = async () => {
-    await logAsync('1 秒後會出現這句', 1000);
-    await logAsync('再 1.5 秒後會出現這句', 1500);
-    await logAsync('再 2 秒後會出現這句', 2000);
-};
-
-demo();
+(function setClock() {
+  var time = new Date();
+  
+  var hours = time.getHours();
+  var minutes = time.getMinutes();
+  var seconds = time.getSeconds();
+  
+  var clock = {
+    hours: document.querySelector('.hour'),
+    minutes: document.querySelector('.minute'),
+    seconds: document.querySelector('.second')
+  };
+  
+  var deg = {
+    hours: 30 * hours + .5 * minutes,
+    minutes: 6 * minutes + .1 * seconds,
+    seconds: 6 * seconds
+  }
+  
+  clock.hours.style.transform = 'translate(-50%, -100%) rotate(' + deg.hours + 'deg)';
+  clock.minutes.style.transform = 'translate(-50%, -100%) rotate(' + deg.minutes + 'deg)';
+  clock.seconds.style.transform = 'translate(-50%, -100%) rotate(' + deg.seconds + 'deg)';
+  
+  var runClock = function(){
+    deg.hours += 360/43200;
+    deg.minutes += 360/3600;
+    deg.seconds += 360/60;
+    
+    clock.hours.style.transform = 'translate(-50%, -100%) rotate(' + deg.hours + 'deg)';
+    clock.minutes.style.transform = 'translate(-50%, -100%) rotate(' + deg.minutes + 'deg)';
+    clock.seconds.style.transform = 'translate(-50%, -100%) rotate(' + deg.seconds + 'deg)';
+  };
+  
+  setInterval(runClock,1000);
+  
+  
+})();

@@ -6,8 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        index: './src/js/index.js',
-        page2: './src/js/page2.js',
+        index: './src/js/index.js'
     },
     plugins:[
         new HtmlWebpackPlugin({
@@ -16,17 +15,11 @@ module.exports = {
             filename: 'index.html',
             cache: false
         }),
-        new HtmlWebpackPlugin({
-            template: './src/page2.html',
-            chunks: ['page2'],
-            filename: 'page2.html',
-            cache: false
-        }),
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: './src/favicon.ico',
-                    to: path.resolve(__dirname, 'dist')
+                    from: './src/assets',
+                    to: './assets'
                 }
             ]
         }),
